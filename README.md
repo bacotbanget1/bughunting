@@ -1,4 +1,4 @@
-# 🐛 Bug Hunting & Vulnerability Scanner
+# Bug Hunting & Vulnerability Scanner
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python Version">
@@ -13,8 +13,7 @@
 
 ---
 
-## 📋 Daftar Isi
-
+## Daftar Isi
 - [Fitur Utama](#-fitur-utama)
 - [Struktur Proyek](#-struktur-proyek)
 - [Instalasi](#-instalasi)
@@ -27,7 +26,7 @@
 
 ---
 
-## ✨ Fitur Utama
+## Fitur Utama
 
 | Jenis Kerentanan | Modul | Metode Deteksi | Severity |
 | :--- | :--- | :--- | :--- |
@@ -40,7 +39,7 @@ Semua payload yang digunakan disimpan terpusat di `tools/payloads.py` sehingga m
 
 ---
 
-## 🏗️ Struktur Proyek
+## Struktur Proyek
 
 ```text
 bughunting/
@@ -62,7 +61,7 @@ bughunting/
 
 ---
 
-## ⚙️ Instalasi
+## Instalasi
 
 ### Prasyarat
 - Python **3.8** atau lebih baru
@@ -87,7 +86,7 @@ pip install requests
 
 ---
 
-## 🚀 Cara Penggunaan
+## Cara Penggunaan
 
 ### 1. Scan Lengkap (Disarankan) — `bug_scanner.py`
 
@@ -132,7 +131,7 @@ python tools/js_checker.py "http://test.com/page" "redirect"
 
 ---
 
-## 📊 Contoh Output
+## Contoh Output
 
 ```text
 =====================================================
@@ -155,7 +154,7 @@ python tools/js_checker.py "http://test.com/page" "redirect"
 
 ---
 
-## 🔧 Konfigurasi Payload
+## Konfigurasi Payload
 
 Semua payload dapat disesuaikan langsung di `tools/payloads.py`:
 
@@ -169,7 +168,7 @@ Tambahkan payload baru sesuai kebutuhan, misalnya payload khusus untuk bypass WA
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 > **HANYA UNTUK PENGUJIAN YANG SAH (AUTHORIZED TESTING)**
 >
@@ -181,7 +180,7 @@ Tambahkan payload baru sesuai kebutuhan, misalnya payload khusus untuk bypass WA
 
 ---
 
-## 🤝 Kontribusi
+## Kontribusi
 
 Kontribusi sangat diterima untuk mengembangkan tool ini lebih lanjut:
 
@@ -193,7 +192,7 @@ Kontribusi sangat diterima untuk mengembangkan tool ini lebih lanjut:
 
 ---
 
-## ⚖️ Lisensi
+## Lisensi
 
 Didistribusikan di bawah **Lisensi MIT**. Lihat file `LICENSE` untuk detail lengkap.
 
