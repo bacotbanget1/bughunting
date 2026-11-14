@@ -1,31 +1,20 @@
 # Bug Hunting Tool
 
-Repositori ini berisi serangkaian skrip untuk melakukan pengujian keamanan dasar (XSS, SQLi, Token Leak) pada target web.
+Repositori ini menyediakan serangkaian skrip untuk pengujian keamanan dasar (XSS, SQLi, Token Leak) pada target web.
 
-### Cara Penggunaan
+### 🚀 Cara Penggunaan Utama
 
-### 1. Scan Lengkap (Disarankan) — `bug_scanner.py`
-
-Menjalankan **semua** modul pengujian (XSS, SQLi, API Token Leak, JS XSS) sekaligus.
-
-**Jika parameter diberikan di CLI:**
+Gunakan `main.py` untuk antarmuka interaktif yang mudah:
 ```bash
-python bug_scanner.py <TARGET_URL> <PARAM_1> [PARAM_2] ...
-```
-**Contoh:**
-```bash
-python bug_scanner.py "https://example.com/search" "q"
+python main.py
 ```
 
-**Jika TIDAK ada parameter di CLI (Full Scan Otomatis):**
-Tool akan secara otomatis membaca daftar parameter dari **`parameter.json`**. Jika file tersebut tidak ada, tool akan menggunakan daftar parameter umum (`id`, `q`, `page`, `user`).
-```bash
-python bug_scanner.py <TARGET_URL>
-```
-**Contoh:**
-```bash
-python bug_scanner.py "https://example.com/profile"
-```
+### Fitur yang Tersedia di Menu:
+1. **Bug Hunter Manual:** Uji XSS & SQLi pada URL dan parameter spesifik.
+2. **Bug Scanner Komprehensif:** Jalankan semua pengujian (XSS, SQLi, Token, JS XSS).
+3. **Subdomain Scanner:** Memindai domain dari `subdomain.json`.
 
-### 2. Scan Manual (XSS & SQLi saja) — `bug_hunter.py`
-...
+### ⚙️ Penggunaan Skrip Asli (Jika diperlukan):
+* **`bug_hunter.py`**: Scan manual. Contoh: `python bug_hunter.py <URL> <PARAM>`
+* **`bug_scanner.py`**: Scan otomatis/parsial. Contoh: `python bug_scanner.py <URL> [PARAM1] [PARAM2]...`
+* **`subdomain_scanner.py`**: Scan subdomain. Contoh: `python subdomain_scanner.py`
