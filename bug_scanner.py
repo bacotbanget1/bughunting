@@ -5,9 +5,18 @@ from bug_hunter import check_xss, check_sqli
 from tools.api_token_checker import check_api_token
 from tools.js_checker import check_js_xss
 
+# Daftar parameter umum yang akan dicoba jika tidak ada input dari user
+DEFAULT_PARAMETERS = ["id", "q", "page", "user"]
+
 def run_all_scans(target_url, parameters):
     """Menjalankan semua jenis pengujian pada parameter yang diberikan."""
     print(f"--- Memulai Comprehensive Bug Hunting pada {target_url} ---")
+    
+    if not parameters:
+        print("[!] Tidak ada parameter yang ditentukan. Mencoba parameter umum: " + ", ".join(DEFAULT_PARAMETERS))
+        parameters = DEFAULT_PARAMETERS
+    else:
+        print(f"[*] Menguji parameter yang diberikan: {', '.join(parameters)}")
     
     for param in parameters:
         print(f"\n=====================================================")
@@ -28,8 +37,9 @@ def run_all_scans(target_url, parameters):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Penggunaan: python bug_scanner.py <target_url> <param1> [param2] ...")
-        print("Contoh: python bug_scanner.py http://target.com/page id user_input")
+        print("Penggunaan: python bug_scanner.py <target_url> [param1] [param2] ...")
+        print("Contoh (Dengan Param): python bug_scanner.py http://target.com/page id user_input")
+        print("Contoh (Full Scan Otomatis): python bug_scanner.py http://target.com/page")
         sys.exit(1)
 
     target_url = sys.argv[1]
