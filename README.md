@@ -71,7 +71,7 @@ bughunting/
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/USERNAME/bughunting.git
+git clone https://github.com/bacotbanget1/bughunting.git
 cd bughunting
 
 # 2. (Opsional tapi disarankan) Buat virtual environment
