@@ -2,16 +2,19 @@
 
 Repositori ini menyediakan serangkaian skrip untuk pengujian keamanan dasar (XSS, SQLi, Token Leak) pada target web.
 
-### 🚀 Cara Penggunaan Utama
+### 🚀 Cara Instalasi
+1. Pastikan Python terinstal di sistem Anda.
+2. Instal dependensi yang dibutuhkan:
+   `pip install requests`
+3. Jalankan melalui antarmuka interaktif:
+   `python main.py`
 
-Gunakan `main.py` untuk antarmuka interaktif yang mudah:
-```bash
-python main.py
-```
+### 💡 Cara Penggunaan Utama
+Gunakan `main.py` untuk antarmuka interaktif yang mudah. Pilih fitur dari menu, masukkan URL target, dan masukkan parameter yang ingin diuji (jika diperlukan).
 
-### Fitur yang Tersedia di Menu:
+### ✨ Fitur yang Tersedia di Menu:
 1. **Bug Hunter Manual:** Uji XSS & SQLi pada URL dan parameter spesifik.
-2. **Bug Scanner Komprehensif:** Jalankan semua pengujian (XSS, SQLi, Token, JS XSS).
+2. **Bug Scanner Komprehensif:** Jalankan semua pengujian (XSS, SQLi, Token, JS XSS) pada parameter yang ditentukan.
 3. **Subdomain Scanner:** Memindai domain dari `subdomain.json`.
 
 ### ⚙️ Penggunaan Skrip Asli (Jika diperlukan):
