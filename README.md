@@ -1,25 +1,35 @@
-# Bug Hunting Tool Suite
+# Bug Hunting Tool
 
-Aplikasi ini adalah suite pengujian keamanan otomatis (XSS, SQLi, Token Leak, JS Celah) yang dirancang untuk developer dan profesional keamanan siber.
+Alat ini dirancang untuk membantu Developer dan Cyber Security menguji kerentanan umum pada aplikasi web target.
+
+## 🎯 Objek yang Diincar
+*   Cross-Site Scripting (XSS)
+*   SQL Injection (SQLi)
+*   API Key / Token Leakage
+*   Celah JavaScript (DOM XSS)
 
 ## 🚀 Cara Menjalankan
-Semua pengujian dapat diorkestrasi melalui `bug_scanner.py` (yang akan saya buatkan setelah ini untuk integrasi penuh).
+Gunakan `bug_scanner.py` sebagai *entry point* utama.
 
-**Contoh Penggunaan (Setelah integrasi):**
-`python bug_scanner.py <TARGET_URL> <PARAMETER_1> <PARAMETER_2> ...`
+**Sintaks:**
+`python bug_scanner.py <target_url> <param1> [param2] ...`
 
-## 🛠️ Modul yang Tersedia
-*   **`bug_hunter.py`**: Menguji Reflected XSS dan SQL Injection dasar.
-*   **`tools/api_token_checker.py`**: Mencari kebocoran API Key/Token.
-*   **`tools/js_checker.py`**: Menguji celah JavaScript/DOM XSS.
-*   **`tools/payloads.py`**: Menyimpan semua payload yang digunakan.
+**Contoh:**
+`python bug_scanner.py http://target.com/page id user_input`
 
-## 🚨 Pelaporan Bug
-Jika bug terdeteksi, output akan mencakup:
+## 🔍 Hasil Deteksi Bug
+Jika bug ditemukan, tools akan mencetak detail lengkap:
 *   URL yang terinfeksi
 *   Parameter yang bermasalah
-*   **Severity** (Critical, Medium, Low)
-*   **Cara Uji**: Instruksi singkat tentang bagaimana bug terdeteksi.
-*   **Lokasi**: URL parameter yang rentan.
+*   **Severity:** Critical, Medium, Low
+*   **Cara Uji:** Instruksi singkat tentang bagaimana bug itu terdeteksi.
+*   **Lokasi:** URL parameter yang terpengaruh.
 
-**Catatan:** Tool ini adalah alat bantu *discovery* dan **bukan pengganti** pengujian manual yang mendalam. Selalu pastikan Anda memiliki izin eksplisit dari pemilik target sebelum melakukan pengujian.
+## 🛠️ Struktur Proyek
+*   `bug_hunter.py`: Logika dasar XSS dan SQLi.
+*   `bug_scanner.py`: Orchestrator utama yang menjalankan semua scan.
+*   `tools/api_token_checker.py`: Pengujian kebocoran token/API Key.
+*   `tools/js_checker.py`: Pengujian celah JavaScript/DOM XSS.
+*   `tools/payloads.py`: Menyimpan daftar payload yang digunakan.
+
+**Catatan:** Pastikan Anda telah menginstal library `requests` (`pip install requests`).
