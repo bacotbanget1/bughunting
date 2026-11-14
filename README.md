@@ -1,36 +1,25 @@
-# bughunting
+# Bug Hunting Tool Suite
 
-Tools ini dirancang untuk membantu Developer dan Cyber Security dalam melakukan bug hunting otomatis pada website target.
+Aplikasi ini adalah suite pengujian keamanan otomatis (XSS, SQLi, Token Leak, JS Celah) yang dirancang untuk developer dan profesional keamanan siber.
 
-## 🎯 Objek yang Diincar
-*   Cross-Site Scripting (XSS)
-*   SQL Injection (SQLi)
-*   API Key / Token Exposure
-*   Celah JavaScript
-*   Lainnya
+## 🚀 Cara Menjalankan
+Semua pengujian dapat diorkestrasi melalui `bug_scanner.py` (yang akan saya buatkan setelah ini untuk integrasi penuh).
 
-## 🚀 Cara Penggunaan
-Tools ini dapat dijalankan di berbagai OS (Mac, Linux, Windows, Termux, VPS/RDP) menggunakan Python.
+**Contoh Penggunaan (Setelah integrasi):**
+`python bug_scanner.py <TARGET_URL> <PARAMETER_1> <PARAMETER_2> ...`
 
-**Contoh Penggunaan (XSS/SQLi):**
-```bash
-python bug_hunter.py <target_url> <parameter_to_test>
-# Contoh: python bug_hunter.py http://target.com/page ?id
-```
+## 🛠️ Modul yang Tersedia
+*   **`bug_hunter.py`**: Menguji Reflected XSS dan SQL Injection dasar.
+*   **`tools/api_token_checker.py`**: Mencari kebocoran API Key/Token.
+*   **`tools/js_checker.py`**: Menguji celah JavaScript/DOM XSS.
+*   **`tools/payloads.py`**: Menyimpan semua payload yang digunakan.
 
-## 🐞 Pelaporan Bug
-Jika bug terdeteksi, tools akan otomatis mencetak detail berikut:
-1.  **Bug Ditemukan:** (Contoh: Reflected XSS, SQL Injection)
-2.  **URL:** URL lengkap saat bug terpicu.
-3.  **Parameter:** Parameter yang diuji.
-4.  **Severity:** (Critical, Medium, Low)
-5.  **Cara Uji:** (Disebutkan dalam output)
-6.  **Lokasi di URL:** (Disebutkan dalam output)
+## 🚨 Pelaporan Bug
+Jika bug terdeteksi, output akan mencakup:
+*   URL yang terinfeksi
+*   Parameter yang bermasalah
+*   **Severity** (Critical, Medium, Low)
+*   **Cara Uji**: Instruksi singkat tentang bagaimana bug terdeteksi.
+*   **Lokasi**: URL parameter yang rentan.
 
-## 🛠️ Struktur Proyek
-*   `bug_hunter.py`: Logika utama pengujian (XSS, SQLi).
-*   `tools/payloads.py`: Berisi daftar payload untuk berbagai jenis serangan.
-*   *(Akan ditambahkan file pengujian API/Token di kemudian hari)*
-
----
-*Disclaimer: Gunakan tools ini hanya pada sistem yang Anda miliki izin eksplisit untuk diuji.*
+**Catatan:** Tool ini adalah alat bantu *discovery* dan **bukan pengganti** pengujian manual yang mendalam. Selalu pastikan Anda memiliki izin eksplisit dari pemilik target sebelum melakukan pengujian.
