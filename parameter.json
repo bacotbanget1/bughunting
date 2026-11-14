@@ -1,0 +1,10 @@
+{
+    "parameters": [
+        "id",
+        "q",
+        "page",
+        "user",
+        "session_id",
+        "token"
+    ]
+}
