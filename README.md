@@ -1,176 +1,178 @@
-# 🐞 Bug Hunting Tool
+<div align="center">
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
-[![Last Commit](https://img.shields.io/badge/last%20commit-day-green.svg)]()
-[![Stars](https://img.shields.io/badge/stars-★★★★★-ffcc00.svg)]()
+# 🐞 Bug Hunting Automation Tool
+
+**Suite pengujian penetrasi web & recon otomatis ringan berbasis Python untuk Security Researcher dan Bug Hunters.**
+
+[![Python Version](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-blue.svg?style=for-the-badge)]()
+[![Security Rating](https://img.shields.io/badge/Security-Audit%20Ready-red.svg?style=for-the-badge)]()
+
+[Fitur](#-fitur-utama) • [Instalasi](#-instalasi) • [Panduan Penggunaan](#-panduan-penggunaan) • [Struktur Proyek](#-struktur-arsitektur) • [Disclaimer](#-disclaimer-hukum)
+
+</div>
 
 ---
 
-## 🔍 Deskripsi Singkat
+## 📖 Tentang Proyek
 
-**Bug Hunting Tool** adalah paket utilitas open-source untuk deteksi otomatis kerentanan web seperti **XSS**, **SQL Injection**, serta **API Token Leak**. Dirancang untuk developer, security researcher, maupun pemula yang ingin belajar bug bounty dengan pendekatan praktis.
+**Bug Hunting Tool** adalah utilitas keamanan web modular berbasis Python yang dirancang untuk mempercepat tahap *reconnaissance* dan deteksi awal celah keamanan umum pada target web. Tool ini membantu menemukan kelemahan seperti Reflected Cross-Site Scripting (XSS), SQL Injection (Error-Based), kebocoran token/kredensial API, dan pemetaan subdomain aktif secara otomatis.
+
+Cocok digunakan untuk latihan di lab keamanan (DVWA, PortSwigger, CTF) maupun pengujian resmi pada program *Bug Bounty*.
 
 ---
 
 ## ✨ Fitur Utama
 
-| Fitur | Deskripsi | Kategori |
-|-------|-----------|----------|
-| **XSS Scanner** | Mendeteksi Reflected XSS pada parameter URL | Web Security |
-| **SQLi Scanner** | Menguji SQL Injection (Error-Based) | Web Security |
-| **API Token Checker** | Memeriksa kebocoran API Key/Token | Auth Security |
-| **JavaScript XSS** | Menguji DOM-based XSS | Web Security |
-| **Subdomain Scanner** | Memindai subdomain dari daftar | Recon |
-| **Interactive Menu** | Antarmuka CLI yang ramah pengguna | UX |
+| Modul / Fitur | Deskripsi | Deteksi |
+|---|---|---|
+| 💉 **Reflected XSS Scanner** | Menginjeksi payload XSS ke parameter URL dan mengevaluasi pantulan (*reflection*) dalam respon HTTP. | Web Vulnerability |
+| 🛡️ **SQLi Detector** | Menguji parameter dengan berbagai *vector injection* berbasis sintaks SQL dan mencocokkan error engine basis data (MySQL, PostgreSQL, MSSQL, Oracle). | Web Vulnerability |
+| 🔑 **API Token / Key Leak** | Menganalisis parameter atau respon terhadap paparan format token, API keys, dan secret tokens populer. | Information Disclosure |
+| 🌐 **DOM / JS Checker** | Memeriksa konteks JavaScript dan sink berbahaya pada frontend target. | Client-side Security |
+| 📡 **Subdomain Scanner** | Memvalidasi daftar target subdomain secara cepat dan menentukan ketersediaan host (`HTTP 200 OK`). | Reconnaissance |
+| 💻 **CLI Interaktif** | Navigasi menu intuitif dan fleksibel langsung dari terminal. | Usability |
 
 ---
 
-## 📦 Struktur Proyek
+## 📂 Struktur Arsitektur
 
-```
+```text
 bacotbanget1/bughunting/
-├── main.py                    # Menu interaktif utama
-├── bug_hunter.py              # Scanner XSS & SQLi manual
-├── bug_scanner.py             # Scanner komprehensif semua tes
-├── subdomain_scanner.py       # Scanner subdomain
-├── parameter.json             # Daftar parameter untuk scanning
-├── subdomain.json             # Daftar domain/subdomain untuk dipindai
+├── main.py                    # Menu utama interaktif (entry point)
+├── bug_hunter.py              # Scanner terfokus untuk XSS & SQLi manual
+├── bug_scanner.py             # Scanner komprehensif berbasis parameter list
+├── subdomain_scanner.py       # Multi-target subdomain checker
+├── parameter.json             # Daftar kata kunci parameter umum (wordlist)
+├── subdomain.json             # Target wordlist domain / subdomain
 └── tools/
-    ├── api_token_checker.py   # Deteksi API token/key
-    ├── js_checker.py          # Deteksi JavaScript/DOM XSS
-    └── payloads.py            # Payload dan regex deteksi
+    ├── api_token_checker.py   # Modul deteksi pola API token / secret
+    ├── js_checker.py          # Modul analisis sink JavaScript & DOM
+    └── payloads.py            # Koleksi payload exploit & regex database error
 ```
 
 ---
 
 ## 🚀 Instalasi
 
-### Prasyarat
-- Python 3.6+
-- `requests` library
+### 1. Prasyarat Sistem
+- Python 3.8 ke atas
+- Koneksi Internet untuk scanning target eksternal
 
-### Langkah Instalasi
+### 2. Kloning Repository & Pengaturan Environtment
 
 ```bash
-# Clone repository
+# Kloning repo
 git clone https://github.com/bacotbanget1/bughunting.git
 cd bughunting
 
-# Install dependencies
-pip install requests
+# (Opsional tapi disarankan) Buat virtual environment
+python -m venv venv
+source venv/bin/activate  # Untuk Linux/macOS
+# venv\Scripts\activate   # Untuk Windows
 
-# (Opsional) Install semua tools secara bersamaan
-pip install -r requirements.txt  # Jika ada
+# Instalasi dependensi
+pip install requests
 ```
 
 ---
 
-## 🛠️ Penggunaan
+## 🛠️ Panduan Penggunaan
 
-### 1. Menggunakan Menu Interaktif (Disarankan)
+### 1. Menu Interaktif (Rekomendasi)
+Jalankan antarmuka utama untuk memilih jenis pengujian tanpa perlu menghafal argumen CLI:
 
 ```bash
 python main.py
 ```
 
-> Pilih antara:
-> - **Scan Manual** → XSS & SQLi
-> - **Scan Komprehensif** → Semua tipe keamanan
-> - **Scan Subdomain** → Recon domain
-
 ---
 
-### 2. Scan Manual (XSS & SQLi)
+### 2. Manual Scan (Target Spesifik & Parameter Tertentu)
+Gunakan `bug_hunter.py` bila Anda ingin menguji endpoint spesifik dengan parameter tunggal:
 
 ```bash
-python bug_hunter.py <target_url> <parameter>
+python bug_hunter.py <TARGET_URL> <PARAMETER>
 
 # Contoh:
-python bug_hunter.py http://test.com/search ?q
+python bug_hunter.py https://example.com/search.php q
 ```
 
 ---
 
-### 3. Scan Komprehensif Semua Parameter
+### 3. Comprehensive Scan (Semua Fitur Otomatis)
+Gunakan `bug_scanner.py` untuk menguji kerentanan menggunakan daftar parameter:
 
 ```bash
-# Dengan parameter manual
-python bug_scanner.py http://test.com/search id q page user
+# Mode 1: Otomatis memuat parameter dari parameter.json
+python bug_scanner.py https://example.com/item
 
-# Otomatis membaca dari parameter.json
-python bug_scanner.py http://test.com/search
+# Mode 2: Menentukan parameter manual secara berurutan
+python bug_scanner.py https://example.com/item id search page cat
 ```
 
 ---
 
-### 4. Scan Subdomain
+### 4. Subdomain Reconnaissance
+Lakukan validasi subdomain aktif yang didefinisikan pada `subdomain.json`:
 
 ```bash
 python subdomain_scanner.py
 ```
 
-> Tool akan membaca domain dari `subdomain.json` dan memverifikasinya secara paralel.
+---
+
+## ⚙️ Kustomisasi Wordlist & Payload
+
+Anda dapat menyesuaikan payload dan parameter pengujian langsung pada file konfigurasi:
+
+- **Modifikasi Parameter:** Edit `parameter.json` untuk menambah atau menghapus nama parameter yang sering ditemukan (*e.g.*, `redirect`, `callback`, `file`, dll.).
+- **Modifikasi Payload:** Buka `tools/payloads.py`:
+  - `XSS_PAYLOADS`: Daftar payload XSS untuk bypass filter umum.
+  - `SQLI_PAYLOADS`: Karakter khusus dan kutip penguji sintaks SQL.
+  - `SQL_ERRORS`: Signature regex error database.
+  - `TOKEN_CHECK_PAYLOADS`: Pola deteksi API key/token.
 
 ---
 
-## ⚙️ Konfigurasi Payload
+## 📋 Contoh Hasil Deteksi
 
-Payload utama disimpan di `tools/payloads.py`:
+```text
+[+] Memulai pengujian pada target: https://vulnerable-site.test/search
+[*] Parameter uji: query
+----------------------------------------------------------------------
+[!!!] KERENTANAN DITEMUKAN: Reflected XSS
+      [>] Payload  : <script>alert(1)</script>
+      [>] Parameter: query
+      [>] URL Bukti: https://vulnerable-site.test/search?query=%3Cscript%3Ealert(1)%3C/script%3E
 
-| Tipe | File | Variabel |
-|------|------|----------|
-| XSS | `payloads.py` | `XSS_PAYLOADS` |
-| SQLi | `payloads.py` | `SQLI_PAYLOADS` |
-| API Token | `payloads.py` | `TOKEN_CHECK_PAYLOADS` |
-
-Anda dapat menambahkan payload kustom sesuai kebutuhan.
-
----
-
-## 📊 Contoh Output
-
+[!!!] KERENTANAN DITEMUKAN: Error-Based SQL Injection
+      [>] Payload  : ' OR '1'='1
+      [>] Pattern  : You have an error in your SQL syntax
+----------------------------------------------------------------------
+[+] Selesai. Laporan siap dianalisis.
 ```
-=====================================================
-[!!!] BUG DITEMUKAN: Reflected XSS
-    URL: http://test.com/search?q=%3Cscript%3Ealert(1)%3C/script%3E
-    Parameter: q
-    Severity: Medium
-=====================================================
-```
 
 ---
 
-## ⚠️ Disclaimer
+## ⚠️ Disclaimer Hukum
 
-> **Tools ini hanya untuk edukasi dan testing aman di lingkungan yang Anda kontrol.** Penggunaan terhadap sistem tanpa izin adalah pelanggaran hukum. Selalu dapatkan persetujuan sebelum melakukan scanning.
+> **PERINGATAN:** Proyek ini dibuat dan didistribusikan semata-mata untuk **tujuan edukasi, riset keamanan siber, dan penetrasi etis (Ethical Hacking)**. Menguji target web tanpa izin tertulis yang sah dari pemilik sistem adalah tindakan melanggar hukum. Pembuat tidak bertanggung jawab atas kerugian atau tindakan ilegal yang dilakukan oleh pihak mana pun menggunakan perangkat lunak ini.
 
 ---
 
 ## 🤝 Kontribusi
 
-Terbuka untuk kontribusi! Silakan:
+Kontribusi dari komunitas sangat disambut:
 1. Fork repository ini
-2. Buat branch fitur (`git checkout -b feature/amazing-feature`)
-3. Commit perubahan (`git commit -m 'Add amazing feature'`)
-4. Push branch (`git push origin feature/amazign-feature`)
-5. Buka Pull Request
+2. Buat branch fitur baru (`git checkout -b feature/FiturBaru`)
+3. Lakukan commit perubahan (`git commit -m 'Menambahkan payload bypass baru'`)
+4. Push ke branch Anda (`git push origin feature/FiturBaru`)
+5. Buka Pull Request (PR)
 
 ---
 
 ## 📄 Lisensi
 
-Distribusi di bawah lisensi **MIT**. Lihat file `LICENSE` untuk detail lebih lanjut.
-
----
-
-## 🙏 Penutup
-
-Semoga tools ini membantu Anda dalam **bug hunting journey**! Jangan lupa untuk:
-- ✅ Laporkan bug yang ditemukan
-- ✅ Beri bintang ⭐ jika tools ini membantu
-- ✅ Ikuti project ini untuk update terbaru
-
----
-
-**Made with ❤️ by NazamaLint**
+Didistribusikan di bawah lisensi **MIT**. Silakan tinjau file `LICENSE` untuk ketentuan lebih lanjut.
